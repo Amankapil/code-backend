@@ -102,6 +102,7 @@ router.post("/addconsulting", addWebInfoculsulting);
 router.post("/adduserexper", addWebInfouserExper);
 router.post("/addproductdev", addWebInfoproducdev);
 router.post("/adddigitalmark", addWebInfodigitalmark);
+
 // router.post("/uploads", addWebInfohomeHeroImages);
 
 router.post("/login", Login);

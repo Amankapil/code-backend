@@ -1,5 +1,5 @@
 import db from "../index.js";
-import nodemailer from "nodemailer";
+
 import path from "path";
 
 export const addWebInfoImages = (req, res) => {
