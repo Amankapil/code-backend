@@ -51,7 +51,6 @@ import {
   getWebProducDev,
   getWebdigitalmarket,
   addWebInfodigitalmark,
-  addWebInfoImages,
 } from "../ctrl/controller.js";
 
 const router = express.Router();
@@ -80,7 +79,6 @@ router.get("/producdev", getWebProducDev);
 router.get("/digitalmarketing", getWebdigitalmarket);
 
 router.post("/add", addWebInfo);
-router.post("/addimages", addWebInfoImages);
 router.post("/addAbout", addWebInfoAbout);
 router.post("/addServices", addWebInfoServices);
 router.post("/addaboutHero", addWebInfoAboutHero);

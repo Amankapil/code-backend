@@ -2,54 +2,7 @@ import db from "../index.js";
 
 import path from "path";
 
-export const addWebInfoImages = (req, res) => {
-  try {
-    // const { homeHero } = req.body;
-    const { image } = req.files.image;
 
-    const data = {
-      image: image,
-
-      // homeHero: homeHero,
-      // homeAbout: homeAbout,
-      // homeService: homeService,
-      // homeClient: homeClient,
-      // homeBlog: homeBlog,
-      // homeAbout, homeService, homeClient, homeBlog
-    };
-
-    const imageName = Date.now() + "-" + image.name;
-    const imagePath = path.join(__dirname, "public", imageName);
-
-    image.mv(imagePath, (error) => {
-      if (error) {
-        console.log(error);
-        res.status(500).send(error);
-      } else {
-        const query = "INSERT INTO images SET ?";
-        const values = { name: imageName };
-
-        db.query(query, values, (error, results) => {
-          if (error) {
-            console.log(error);
-            res.status(500).send(error);
-          } else {
-            res.status(200).send("Image uploaded successfully!");
-          }
-        });
-      }
-    });
-
-    // db.query("INSERT INTO homeHero_image set ?", data, (err, rows, fields) => {
-    //   if (err) {
-    //     console.error(err);
-    //   } else {
-    //     console.log(rows);
-    //     res.send("added");
-    //   }
-    // });
-  } catch (err) {}
-};
 
 export const addWebInfo = (req, res) => {
   try {
