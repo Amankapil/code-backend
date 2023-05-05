@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 app.use("/code", webroute);
 
-const db = mysql.createPool({
+const db = mysql.createConnection({
   host: "127.0.0.1",
   user: "syedsaif",
   password: "5LIxqktlabYiGcdF",
@@ -26,7 +26,7 @@ const db = mysql.createPool({
 //   password: "u]1ro&X$1R",
 //   database: "u947451844_pages",
 // });
-db.getConnection((err) => {
+db.connect((err) => {
   if (err) {
     console.log(err);
   } else {
