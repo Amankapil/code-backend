@@ -14,18 +14,18 @@ app.use(bodyParser.json());
 
 app.use("/code", webroute);
 
-const db = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "syedsaif",
-  password: "5LIxqktlabYiGcdF",
-  database: "dashboard",
-});
 // const db = mysql.createConnection({
-//   host: "217.21.87.205",
-//   user: "u947451844_saif08",
-//   password: "u]1ro&X$1R",
-//   database: "u947451844_pages",
+//   host: "127.0.0.1",
+//   user: "syedsaif",
+//   password: "5LIxqktlabYiGcdF",
+//   database: "dashboard",
 // });
+const db = mysql.createConnection({
+  host: "217.21.87.205",
+  user: "u947451844_saif08",
+  password: "u]1ro&X$1R",
+  database: "u947451844_pages",
+});
 db.connect((err) => {
   if (err) {
     console.log(err);
