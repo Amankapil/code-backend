@@ -16,8 +16,8 @@ app.use("/code", webroute);
 
 const db = mysql.createConnection({
   host: "127.0.0.1",
-  user: "root",
-  password: "",
+  user: "syedsaif",
+  password: "5LIxqktlabYiGcdF",
   database: "dashboard",
 });
 // const db = mysql.createConnection({
