@@ -1,8 +1,8 @@
 import db from "../index.js";
 
 import path from "path";
-import cookieParser from "cookie-parser";
-import bcrypt from "bcrypt";
+// import cookieParser from "cookie-parser";
+// import bcrypt from "bcrypt";
 
 export const addWebInfo = (req, res) => {
   try {
@@ -928,19 +928,6 @@ const users = [
       "$2b$10$8L.qQDpO9rlcXw6C7m9RiOdyZgjGZgFy/bjsh5c3FbFvx9JfWaa6a",
   },
 ];
-
-const requireAuth = (req, res, next) => {
-  const { sessionId } = req.cookies;
-  if (!sessionId) {
-    return res.sendStatus(401);
-  }
-  const user = users.find((u) => u.id === sessionId);
-  if (!user) {
-    return res.sendStatus(401);
-  }
-  req.user = user;
-  next();
-};
 
 export const Login = async (req, res) => {
   const { username, password } = req.body;

@@ -3,8 +3,8 @@ import cors from "cors";
 import mysql from "mysql2";
 import bodyParser from "body-parser";
 import multer from "multer";
-import cookieParser from "cookie-parser";
-import bcrypt from "bcrypt";
+// import cookieParser from "cookie-parser";
+// import bcrypt from "bcrypt";
 import webroute from "./routes/routes.js";
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.json());
 // app.use(express.urlencoded());
 app.use(cors());
 app.use(bodyParser.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use("/code", webroute);
 
