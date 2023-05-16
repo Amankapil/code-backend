@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
-import mysql from "mysql";
+import mysql from "mysql2";
 import bodyParser from "body-parser";
 import multer from "multer";
+import cookieParser from "cookie-parser";
+import bcrypt from "bcrypt";
 import webroute from "./routes/routes.js";
 
 const app = express();
@@ -11,6 +13,7 @@ app.use(express.json());
 // app.use(express.urlencoded());
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use("/code", webroute);
 
@@ -20,13 +23,13 @@ app.use("/code", webroute);
 //   password: "5LIxqktlabYiGcdF",
 //   database: "dashboard",
 // });
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: "217.21.87.205",
   user: "u947451844_saif08",
   password: "u]1ro&X$1R",
   database: "u947451844_pages",
 });
-db.connect((err) => {
+db.getConnection((err) => {
   if (err) {
     console.log(err);
   } else {

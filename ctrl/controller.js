@@ -1,8 +1,8 @@
 import db from "../index.js";
 
 import path from "path";
-
-
+import cookieParser from "cookie-parser";
+import bcrypt from "bcrypt";
 
 export const addWebInfo = (req, res) => {
   try {
@@ -442,15 +442,15 @@ export const sendMailContact = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "amankapil60@gmail.com", // Replace with your own email address
-      pass: "zcgdsscknnjxmjlh", // Replace with your own email password
+      user: "info@codelinear.com", // Replace with your own email address
+      pass: "hffsiftjfbzbraej", // Replace with your own email password
     },
   });
   // zcgdsscknnjxmjlh
 
   const mailOptions = {
-    from: "amankapil60@gmail.com", // Replace with your own email address
-    to: "rcky876@gmail.com", // Replace with the recipient's email address
+    from: { email }, // Replace with your own email address
+    to: "info@codelinear.com", // Replace with the recipient's email address
     subject: "New message from your website",
     text: `FristName: ${fristName}\n LastName: ${lastName}\n Email: ${email}\n Number: ${number}\nMessage: ${message}`,
   };
@@ -471,16 +471,15 @@ export const sendMailCareer = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "amankapil60@gmail.com", // Replace with your own email address
-      pass: "zcgdsscknnjxmjlh", // Replace with your own email password
+      user: "hr@codlinear.com", // Replace with your own email address
+      pass: "hhsmejuvtkademrt", // Replace with your own email password
     },
   });
-  
   // zcgdsscknnjxmjlh
 
   const mailOptions = {
-    from: "amankapil60@gmail.com", // Replace with your own email address
-    to: "rcky876@gmail.com", // Replace with the recipient's email address
+    from: { email }, // Replace with your own email address
+    to: "hr@codelinear.com", // Replace with the recipient's email address
     subject: "New message from your website",
     text: `FristName: ${fristName}\n LastName: ${lastName}\n Email: ${email}\nMessage: ${message}`,
   };
@@ -919,24 +918,57 @@ export const getWebdigitalmarket = (req, res) => {
   console.log("welcome");
   // });
 };
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-export const Login = (req, res) => {
+const users = [
+  {
+    id: 1,
+    username: "user1@example.com",
+    passwordHash:
+      "$2b$10$8L.qQDpO9rlcXw6C7m9RiOdyZgjGZgFy/bjsh5c3FbFvx9JfWaa6a",
+  },
+];
+
+const requireAuth = (req, res, next) => {
+  const { sessionId } = req.cookies;
+  if (!sessionId) {
+    return res.sendStatus(401);
+  }
+  const user = users.find((u) => u.id === sessionId);
+  if (!user) {
+    return res.sendStatus(401);
+  }
+  req.user = user;
+  next();
+};
+
+export const Login = async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
 
-  if (password === "123") {
-    res.status(200);
-    res.send({ message: "Login Successfull"});
-  } else {
-    res.status(404);
-    res.send({ message: "Password didn't match" });
+  const user = users.find((u) => u.username === username);
+  if (!user) {
+    return res.sendStatus(401);
   }
-  res.send({ message: "User not registered" });
+  // const passwordMatches = await bcrypt.compare(password, user.passwordHash);
+  // if (!passwordMatches) {
+  //   return res.sendStatus(401);
+  // }
+  res.cookie("sessionId", user.id);
+  res.sendStatus(200);
+
+  // if (password === "123") {
+  //   res.status(200);
+  //   res.send({ message: "Login Successfull" });
+  // } else {
+  //   res.status(404);
+  //   res.send({ message: "Password didn't match" });
+  // }
+  // res.send({ message: "User not registered" });
 };
 
 export const Logout = (req, res) => {
-  res.setHeader("Set-Cookie", [
-    "session=; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
-  ]);
+  res.clearCookie("sessionId");
+  res.sendStatus(200);
   res.redirect("/login");
 };
