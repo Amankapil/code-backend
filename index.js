@@ -37,7 +37,7 @@ db.getConnection((err) => {
   }
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4500;
 app.listen(port, () => {
   console.log(`app running on port ${port}...`);
 });
